@@ -61,7 +61,7 @@
               </sec:ifLoggedIn>
             </ul>
             <sec:ifNotLoggedIn>
-            <form class="navbar-form pull-right" action="${postUrl}" method="post">
+            <form class="navbar-form pull-right" action="${request.contextPath}/j_spring_security_check" method="post">
               <input name='j_username' class="span2" type="text" placeholder="Email">
               <input name='j_password' class="span2" type="password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>
