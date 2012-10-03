@@ -8,6 +8,7 @@ class UrlMappings {
 		}
 
 		"/"(controller: "Home",action:"index")
-		"500"(view:'/error')
+		"/500"(view:'/error/internalerror')
+		"/404"(view:'/error/notfound')
 	}
 }
