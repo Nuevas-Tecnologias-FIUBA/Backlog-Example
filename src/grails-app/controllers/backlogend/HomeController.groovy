@@ -34,6 +34,9 @@ class HomeController {
 			render view:'create', model: [user: cmd]
 			return
 		}
+
+		new User(name:cmd.name).save()
+
 		redirect controller:'home'
 	}
 }
