@@ -1,5 +1,8 @@
 package backlogend
 
+/**
+ * Comando utilizado para crear un nuevo usuario 
+ */
 class NewUserCommand {
 	String name
 	String password
@@ -13,6 +16,9 @@ class NewUserCommand {
 	}
 }
 
+/**
+ * Comando utilizado para cambiar el estado de una historia de usuario
+ */
 class ChangeStatusCommand {
 	Integer userStoryId
 	Integer newStatusId
@@ -30,6 +36,7 @@ class HomeController {
 		render view:"index"
 	}
 
+	/* mostrar información de usuario */
 	def show(int id) {
 		def user = User.findById(id)
 		if (!user) {
@@ -40,6 +47,7 @@ class HomeController {
 		render view: "show", model: [user: user, id:id]
 	}
 
+	/* crear un nuevo usuario */
 	def create() {
 		render view: 'create', model: [user: new NewUserCommand()]
 	}
@@ -58,11 +66,14 @@ class HomeController {
 		redirect controller:'home'
 	}
 	
+	/* cambiar estado de historia de usuario */
 	def changeStatus() {
 		render view: 'change_status', model: [changeStatus: new ChangeStatusCommand()]
 	}
 	
+	// user story service, grails lo inyectará automáticamente
 	def userStoryService
+
 	def doChangeStatus(ChangeStatusCommand cmd) {
 		if (cmd.hasErrors()) {
 			render view: 'change_status', model: [changeStatus: cmd]
