@@ -21,9 +21,10 @@
 				<h2>Ingresá la información del usuario</h2>
 
 				<g:form class="form-horizontal" action="save">
-					<g:renderErrors bean="${user}" />
-
 					<!--
+					<g:renderErrors bean="${user}" />
+					-->
+
 					<g:hasErrors bean="${user}">
 						<div class="alert alert-error">
 			              <button type="button" class="close" data-dismiss="alert">×</button>
@@ -35,7 +36,6 @@
 							  </ul>
 			            </div>
 					</g:hasErrors>
-					 -->
 					
 					<fieldset>
 						<legend>Información personal</legend>
