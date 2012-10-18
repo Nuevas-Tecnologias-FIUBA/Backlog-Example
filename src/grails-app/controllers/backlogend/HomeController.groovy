@@ -45,7 +45,6 @@ class HomeController {
 		}
 
 		userService.createNewUser(cmd.name, cmd.password)
-
 		redirect controller:'home'
 	}
 }
