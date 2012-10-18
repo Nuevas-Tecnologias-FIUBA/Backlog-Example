@@ -2,9 +2,14 @@ package backlogend
 
 class NewUserCommand {
 	String name
+	String password
+	String confirmation
 
 	static constraints = {
-		name(blank: false, minSize: 6)
+		name(blank: false, minSize: 6);
+		password(blank: false);
+		confirmation(blank: false,
+					 validator: {val, obj -> if (obj.password != val) return "passwordDoNotMatch" });
 	}
 }
 
@@ -39,7 +44,7 @@ class HomeController {
 			return
 		}
 
-		userService.createNewUser(cmd.name)
+		userService.createNewUser(cmd.name, cmd.password)
 
 		redirect controller:'home'
 	}

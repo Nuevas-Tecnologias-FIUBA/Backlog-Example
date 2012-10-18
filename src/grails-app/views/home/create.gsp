@@ -45,6 +45,18 @@
 								<input type="text" name="name" value="${user.name}">
 							</div>
 						</div>
+						<div class="control-group">
+							<label class="control-label">Contraseña</label>
+							<div class="controls">
+								<input type="password" name="password">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Repetir contraseña</label>
+							<div class="controls">
+								<input type="password" name="confirmation">
+							</div>
+						</div>
 						<div class="form-actions">
 						  <button type="submit" class="btn btn-primary">Crear</button>
 						  <button type="button" class="btn">Cancel</button>
