@@ -69,7 +69,16 @@ class HomeController {
 			return
 		}
 
-		userStoryService.changeStatus(cmd.userStoryId, cmd.newStatusId)
+		try {
+
+			userStoryService.changeStatus(cmd.userStoryId, cmd.newStatusId)
+		} catch (IllegalArgumentException) {
+			cmd.errors.rejectValue("newStatusId", "Transición inválida")
+
+			render view: 'change_status', model: [changeStatus: cmd]
+			return
+		}
+
 		redirect controller:'home'
 	}
 }
