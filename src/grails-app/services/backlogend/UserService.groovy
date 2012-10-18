@@ -14,11 +14,5 @@ class UserService {
 
 		// descomentar para probar la transaccionalidad
 		// throw new IllegalArgumentException();
-
-		log.error("creando story theme")
-		// creamos un story theme
-		def userTheme = new StoryTheme(description: "El usuario ${username} creó este story theme.")
-		userTheme.save()
-		log.error("story theme creado")
     }
 }
