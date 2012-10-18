@@ -70,7 +70,6 @@ class HomeController {
 		}
 
 		try {
-
 			userStoryService.changeStatus(cmd.userStoryId, cmd.newStatusId)
 		} catch (IllegalArgumentException) {
 			cmd.errors.rejectValue("newStatusId", "Transición inválida")
