@@ -13,8 +13,18 @@ class NewUserCommand {
 	}
 }
 
+class ChangeStatusCommand {
+	Integer userStoryId
+	Integer newStatusId
+	
+	static constraints = {
+		userStoryId(blank: false);
+		newStatusId(blank: false);
+	}
+}
+
 class HomeController {
-	static allowedMethods = [save: "POST"]
+	static allowedMethods = [save: "POST", doChangeStatus: "POST"]
 
 	def index() {
 		render view:"index"
@@ -45,6 +55,21 @@ class HomeController {
 		}
 
 		userService.createNewUser(cmd.name, cmd.password)
+		redirect controller:'home'
+	}
+	
+	def changeStatus() {
+		render view: 'change_status', model: [changeStatus: new ChangeStatusCommand()]
+	}
+	
+	def userStoryService
+	def doChangeStatus(ChangeStatusCommand cmd) {
+		if (cmd.hasErrors()) {
+			render view: 'change_status', model: [changeStatus: cmd]
+			return
+		}
+
+		userStoryService.changeStatus(cmd.userStoryId, cmd.newStatusId)
 		redirect controller:'home'
 	}
 }

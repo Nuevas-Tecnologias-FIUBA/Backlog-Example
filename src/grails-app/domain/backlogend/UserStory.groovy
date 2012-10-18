@@ -19,6 +19,10 @@ class UserStory {
 		theme nullable: true
 		points min: 0
 	}
+	
+	def changeStatus(StoryStatus status) {
+		this.status = status
+	}
 
 	public String toString() {
 		return this.getDescription();

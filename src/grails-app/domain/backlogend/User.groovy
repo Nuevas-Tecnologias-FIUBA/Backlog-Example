@@ -9,7 +9,7 @@ class User {
 		name blank:false, unique:true
 		password blank: false
 	}
-
+	
 	public String toString() {
 		return this.getName();
 	}
