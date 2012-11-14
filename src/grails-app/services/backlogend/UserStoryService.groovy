@@ -2,6 +2,8 @@ package backlogend
 
 class UserStoryService {
 
+	def mailSender
+
     def changeStatus(int userStoryId, int newStatusId) {
 		def userStory = UserStory.findById(userStoryId)
 		def newStatus = StoryStatus.findById(newStatusId)
@@ -10,5 +12,6 @@ class UserStoryService {
 		if (!newStatus) throw new IllegalArgumentException("story status id=${newStatusId} does not exist")
 
 		userStory.changeStatus(newStatus)
+		mailSender.notifyStatusChanged(userStory)
     }
 }
