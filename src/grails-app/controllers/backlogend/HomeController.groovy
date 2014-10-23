@@ -1,7 +1,7 @@
 package backlogend
 
 /**
- * Comando utilizado para crear un nuevo usuario 
+ * Comando utilizado para crear un nuevo usuario
  */
 class NewUserCommand {
 	String name
@@ -9,10 +9,11 @@ class NewUserCommand {
 	String confirmation
 
 	static constraints = {
-		name(blank: false, minSize: 6);
-		password(blank: false);
-		confirmation(blank: false,
-					 validator: {val, obj -> if (obj.password != val) return "passwordDoNotMatch" });
+		name blank: false, minSize: 6
+		password blank: false
+		confirmation blank: false, validator: { val, obj ->
+			if (obj.password != val) return "passwordDoNotMatch"
+		}
 	}
 }
 
@@ -22,15 +23,19 @@ class NewUserCommand {
 class ChangeStatusCommand {
 	Integer userStoryId
 	Integer newStatusId
-	
+
 	static constraints = {
-		userStoryId(blank: false);
-		newStatusId(blank: false);
+		userStoryId blank: false
+		newStatusId blank: false
 	}
 }
 
 class HomeController {
-	static allowedMethods = [save: "POST", doChangeStatus: "POST"]
+
+	static allowedMethods = [
+		save: "POST",
+		doChangeStatus: "POST",
+	]
 
 	def index() {
 		render view:"index"
@@ -65,12 +70,12 @@ class HomeController {
 		userService.createNewUser(cmd.name, cmd.password)
 		redirect controller:'home'
 	}
-	
+
 	/* cambiar estado de historia de usuario */
 	def changeStatus() {
 		render view: 'change_status', model: [changeStatus: new ChangeStatusCommand()]
 	}
-	
+
 	// user story service, grails lo inyectará automáticamente
 	def userStoryService
 
@@ -82,7 +87,9 @@ class HomeController {
 
 		try {
 			userStoryService.changeStatus(cmd.userStoryId, cmd.newStatusId)
-		} catch (IllegalArgumentException) {
+		} catch (IllegalArgumentException e) {
+		// NO HACER ESTO: ver http://stackoverflow.com/questions/24913920/groovy-catch-statement-weird-behavior
+		// } catch (IllegalArgumentException) {
 			cmd.errors.rejectValue("newStatusId", "Transición inválida")
 
 			render view: 'change_status', model: [changeStatus: cmd]
