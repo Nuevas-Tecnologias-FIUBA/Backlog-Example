@@ -9,6 +9,6 @@ class StoryPriority {
 	}
 
 	public String toString() {
-		return this.getDescription();
+		this.description
 	}
 }

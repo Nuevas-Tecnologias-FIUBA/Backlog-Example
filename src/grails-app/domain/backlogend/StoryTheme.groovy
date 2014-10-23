@@ -4,13 +4,15 @@ class StoryTheme {
 
 	String description
 
-	static hasMany = [userStories : UserStory]
+	static hasMany = [
+		userStories: UserStory,
+	]
 
 	static constraints = {
-		description blank:false, unique:true
+		description blank: false, unique: true
 	}
 
 	public String toString() {
-		return this.getDescription();
+		this.description
 	}
 }
